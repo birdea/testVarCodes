@@ -1,6 +1,7 @@
 package bd.testcode.java.tests;
 
 import bd.testcode.java.util.L;
+import org.junit.Test;
 
 /**
  * @author seungtae.hwang(birdea @ sk.com)
@@ -8,15 +9,15 @@ import bd.testcode.java.util.L;
  */
 public class TestGlobalAssign {
 
+    @Test
     public void testGa() {
         L.msg("testGa() start");
         Thread tInit = new Thread(new Runnable() {
             @Override
             public void run() {
-                L.msg("tInit > run()");
-                int cntTry = 1000;
+                L.msg("tInit > run() - start");
                 int tSleep = 10;
-                for (int i=0;i<cntTry;i++) {
+                while (true) {
                     sleep(tSleep);
                     init();
                 }
@@ -25,10 +26,9 @@ public class TestGlobalAssign {
         Thread tRelease = new Thread(new Runnable() {
             @Override
             public void run() {
-                L.msg("tRelease > run()");
-                int cntTry = 1000;
-                int tSleep = 10;
-                for (int i=0;i<cntTry;i++) {
+                L.msg("tRelease > run() - start");
+                int tSleep = 30;
+                while (true) {
                     sleep(tSleep);
                     release();
                 }
@@ -37,23 +37,23 @@ public class TestGlobalAssign {
         Thread tUsage = new Thread(new Runnable() {
             @Override
             public void run() {
-                L.msg("tUsage > run()");
-                int cntTry = 1000;
-                int tSleep = 10;
-                for (int i=0;i<cntTry;i++) {
+                L.msg("tUsage > run() - start");
+                int tSleep = 1;
+                while (true) {
                     sleep(tSleep);
                     usage();
                 }
             }
         });
 
-        tInit.setDaemon(false);
-        tRelease.setDaemon(false);
-        tUsage.setDaemon(false);
+//        boolean daemon = true;
+//        tInit.setDaemon(daemon);
+//        tRelease.setDaemon(daemon);
+//        tUsage.setDaemon(daemon);
 
         tInit.start();
-        tRelease.start();
         tUsage.start();
+        tRelease.start();
 
         L.msg("testGa() end");
     }
@@ -79,11 +79,16 @@ public class TestGlobalAssign {
     private void usage() {
         L.msg("testGa() -> usage");
         Object inst = mGlass.getInst();
-        if (inst!=null) {
-            L.msg("inst!=null->toString()");
-            inst.toString();
+
+        if (inst != null) {
+            L.msg("[usage] inst is not null");
+            for (int i=0;i<100;i++) {
+                //sleep(100);
+                L.msg("[usage] obj:"+inst.toString());
+            }
+            L.msg("[usage] usage is complete");
         } else {
-            L.msg("inst==null");
+            L.msg("[usage] inst is null");
         }
     }
 
@@ -109,8 +114,9 @@ public class TestGlobalAssign {
         }
 
         public void release() {
+            String tag = mInst.toString();
             mInst = null;
-            L.msg("release()");
+            L.msg("release() obj : "+tag);
         }
     }
 }

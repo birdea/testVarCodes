@@ -1,6 +1,7 @@
 package bd.testcode.java.tests;
 
 import bd.testcode.java.util.L;
+import org.junit.Test;
 
 /**
  * @author seungtae.hwang(birdea @ sk.com)
@@ -8,10 +9,13 @@ import bd.testcode.java.util.L;
  */
 public class TestSyncCall {
 
+    @Test
     public void test() {
-        L.msg("> testGa started..");
+        L.msg("> testSc started..");
 
         for (int i=0;i<3;i++) {
+//            callFruit();
+
             Thread a = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -19,17 +23,18 @@ public class TestSyncCall {
                 }
             }, "thread.A"+i);
 
-//            Thread b = new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    callFruit();
-//                }
-//            }, "thread.B"+i);
+            /*Thread b = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    callFruit();
+                }
+            }, "thread.B"+i);*/
+
             a.start();
-//            b.start();
+            //b.start();
         }
 
-        L.msg("> testGa ended..");
+        L.msg("> testSc ended..");
     }
 
     private Fruit fruit = new Fruit();
@@ -41,7 +46,7 @@ public class TestSyncCall {
     private static class Fruit {
         Object sync = new Object();
 
-                void callA() {
+        void callA() {
             L.msg("callA() : start");
             synchronized (sync) {
                 String tName = Thread.currentThread().getName();
