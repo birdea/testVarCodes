@@ -6,8 +6,8 @@ package bd.testcode.java.util;
  */
 public class L {
 
-    public static void msg(String msg) {
-        System.out.println(msg);
+    public static void msg(Object msg) {
+        System.out.println(String.valueOf(msg));
     }
 
 }

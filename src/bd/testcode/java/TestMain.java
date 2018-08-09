@@ -13,7 +13,7 @@ public class TestMain {
 //        TestGlobalAssign tga = new TestGlobalAssign();
 //        tga.testGa();
 
-        TestSyncCall tsc = new TestSyncCall();
-        tsc.test();
+//        TestSyncCall tsc = new TestSyncCall();
+//        tsc.test();
     }
 }
