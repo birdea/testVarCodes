@@ -3,6 +3,7 @@ package bd.testcode.java;
 import bd.testcode.java.tests.TestGlobalAssign;
 import bd.testcode.java.tests.TestSyncCall;
 import bd.testcode.java.tests.TestSyncronize;
+import bd.testcode.java.tests.TestVersionCompare;
 
 /**
  * @author seungtae.hwang(birdea @ sk.com)
@@ -17,7 +18,11 @@ public class TestMain {
 //        TestSyncCall tsc = new TestSyncCall();
 //        tsc.test();
 
-        TestSyncronize ts = new TestSyncronize();
-        ts.test_3();
+//        TestSyncronize ts = new TestSyncronize();
+//        ts.test_3();
+
+        TestVersionCompare tvc = new TestVersionCompare();
+        tvc.tests();
     }
+
 }

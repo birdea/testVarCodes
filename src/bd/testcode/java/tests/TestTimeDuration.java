@@ -16,6 +16,6 @@ public class TestTimeDuration {
         long current = System.currentTimeMillis();
         long start = current - 894234;
         long end = current + 20930;
-        Duration duration = Duration.between(LocalTime.start, end);
+        //Duration duration = Duration.between(LocalTime.start, end);
     }
 }
