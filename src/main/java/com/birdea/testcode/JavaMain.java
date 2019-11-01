@@ -1,8 +1,17 @@
 package com.birdea.testcode;
 
-import com.birdea.testcode.test.KtJsonValue;
-import com.birdea.testcode.test.TestVersionCompare;
-import com.birdea.testcode.util.Chapter3_1Kt;
+import com.birdea.testcode.parser.Hcva004Parse;
+import com.birdea.testcode.parser.JsonParserExample;
+import com.birdea.testcode.parser.PushData;
+import com.birdea.testcode.test.TestHalloweenaParty;
+import com.birdea.testcode.util.L;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author seungtae.hwang(birdea @ sk.com)
@@ -11,29 +20,30 @@ import com.birdea.testcode.util.Chapter3_1Kt;
 public class JavaMain {
 
     public static void main(String[] args) {
-//        TestGlobalAssign tga = new TestGlobalAssign();
-//        tga.testGa();
+        String token = "na";
+//        new TestHalloweenaParty().tests();
+//        new JsonParserExample().doTest();
+//        new PushData().parse();
+//        new Hcva004Parse().parse();
+        new FcmAuthTokenManager().doUpdateAuthToken();
+    }
 
-//        TestSyncCall tsc = new TestSyncCall();
-//        tsc.doFirstLast();
+    // result:{"result":"true","errorCode":"","errorMsg":"","dataSet":[],"dataSetMulti":{"authResultMsg":"등록되지 않은 사용자입니다.","authResult":"N","companyResult":"","subjectResult":"","profileResult":"","privacyResult":"","faceResult":""}}
 
-//        TestSyncronize ts = new TestSyncronize();
-//        ts.test_3();
-
-        TestVersionCompare tvc = new TestVersionCompare();
-        tvc.tests();
-
-        //TestJsonValue tjv = new TestJsonValue();
-        //tjv.doFirstLast();
-
-        KtJsonValue ktJsonValue = new KtJsonValue();
-        ktJsonValue.tests();
-
-        log("*** start java process ***");
-
-        char lastChar = Chapter3_1Kt.lastChar("hello");
-        log("lastChar(hello):"+lastChar);
-        log("*** end java process ***");
+    private static boolean 너는소수입니까(int value) {
+        if (value == 0 || value == 1){
+            return false;
+        }
+        int count = 0;
+        for (int i = 2; i < value; i++) {
+            if (value % i == 0) {
+                count++;
+            }
+            if (count > 0) {
+                return false;
+            }
+        }
+        return (count == 0);
     }
 
     private static void log(String msg) {
