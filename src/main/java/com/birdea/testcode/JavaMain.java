@@ -3,6 +3,7 @@ package com.birdea.testcode;
 import com.birdea.testcode.parser.Hcva004Parse;
 import com.birdea.testcode.parser.JsonParserExample;
 import com.birdea.testcode.parser.PushData;
+import com.birdea.testcode.test.TestGetTimerTaskDelay;
 import com.birdea.testcode.test.TestHalloweenaParty;
 import com.birdea.testcode.util.L;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
@@ -25,7 +26,8 @@ public class JavaMain {
 //        new JsonParserExample().doTest();
 //        new PushData().parse();
 //        new Hcva004Parse().parse();
-        new FcmAuthTokenManager().doUpdateAuthToken();
+//        new FcmAuthTokenManager().doUpdateAuthToken();
+        new TestGetTimerTaskDelay().tests();
     }
 
     // result:{"result":"true","errorCode":"","errorMsg":"","dataSet":[],"dataSetMulti":{"authResultMsg":"등록되지 않은 사용자입니다.","authResult":"N","companyResult":"","subjectResult":"","profileResult":"","privacyResult":"","faceResult":""}}
