@@ -3,10 +3,11 @@ package com.birdea.testcode;
 import com.birdea.testcode.parser.Hcva004Parse;
 import com.birdea.testcode.parser.JsonParserExample;
 import com.birdea.testcode.parser.PushData;
+import com.birdea.testcode.test.TestCompanyComparable;
 import com.birdea.testcode.test.TestGetTimerTaskDelay;
 import com.birdea.testcode.test.TestHalloweenaParty;
 import com.birdea.testcode.util.L;
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+//import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -27,7 +28,26 @@ public class JavaMain {
 //        new PushData().parse();
 //        new Hcva004Parse().parse();
 //        new FcmAuthTokenManager().doUpdateAuthToken();
-        new TestGetTimerTaskDelay().tests();
+//        new TestGetTimerTaskDelay().tests();
+        //new TestCompanyComparable().test();
+
+        String title ="로그인 실패";
+        String title1 ="";
+        String body = "아이디, 비밀번호가 올바르지 않습니다.";
+        String body1 = "";
+        String composed = String.format(";%s;%s",title1, body1);
+
+        String[] deposed = composed.split(";");
+
+        L.msg("composed:"+composed);
+        L.msg("deposed:"+deposed);
+        L.msg("deposed.length:"+deposed.length);
+        if (deposed.length > 0) {
+            L.msg("deposed[0]:"+deposed[0]);
+        }
+        if (deposed.length > 1) {
+            L.msg("deposed[1]:"+deposed[1]);
+        }
     }
 
     // result:{"result":"true","errorCode":"","errorMsg":"","dataSet":[],"dataSetMulti":{"authResultMsg":"등록되지 않은 사용자입니다.","authResult":"N","companyResult":"","subjectResult":"","profileResult":"","privacyResult":"","faceResult":""}}
