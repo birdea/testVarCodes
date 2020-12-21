@@ -1,14 +1,11 @@
 plugins {
     id 'groovy'
     id 'java'
-    id 'org.jetbrains.intellij' version '0.4.1'
-    id 'org.jetbrains.kotlin.jvm' version '1.3.11'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
 }
 
 group 'com.birdea.testcode'
 version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -17,6 +14,9 @@ repositories {
 dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'junit:junit:4.12'
+
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
@@ -31,12 +31,4 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
-}
-intellij {
-    version '2018.1.7'
-}
-patchPluginXml {
-    changeNotes """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
 }

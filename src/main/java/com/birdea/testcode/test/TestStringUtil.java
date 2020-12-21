@@ -18,7 +18,6 @@ public class TestStringUtil {
         String c = "c";
         String d = "d";
 
-        L.msg(null+" isAnyEmpty? " + StringUtil.isAnyEmpty(null));
         L.msg(a+" isAnyEmpty? " + StringUtil.isAnyEmpty(a));
         L.msg(a+","+b+" isAnyEmpty? " + StringUtil.isAnyEmpty(a, b));
         L.msg(b+","+c+" isAnyEmpty? " + StringUtil.isAnyEmpty(b, c));
