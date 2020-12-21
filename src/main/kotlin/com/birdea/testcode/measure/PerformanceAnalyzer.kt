@@ -125,10 +125,23 @@ class PerformanceAnalyzer {
         if (item.tag?.startsWith(criteria.tag)==false) {
             return
         }
-        if (item.message?.startsWith(criteria.message)==false) {
+        if (item.message?.startsWith(criteria.message[0])==false) {
             return
         }
+        val extraCheckCount = criteria.message.size
+        if (extraCheckCount > 1) {
+            for (i in 1 until extraCheckCount) {
+                log("check: $i, ${criteria.message[i]}")
+                if (item.message?.contains(criteria.message[i])==false) {
+                    log("check: $i, ${criteria.message[i]} -> false")
+                    return
+                } else {
+                    log("check: $i, ${criteria.message[i]} -> true")
+                }
+            }
+        }
         item.item = measureCriteria.poll()
+        //log("checked: ${item}")
         measureData.add(item)
 
         //log("readLine() - measureData sth on end :" +item.item);
@@ -179,15 +192,15 @@ class PerformanceAnalyzer {
     }
 
     // 로그 데이터 발췌 기준
-    enum class MeasureCriteria(var tag: String, var message: String) {
-        ASR_SPEECH_END("D/NUGUauto::NuguClientManager", "asrListener.onStateChanged(state:SPEECH_END)"),
-        ASR_RESULT("D/ServiceApp_", "notifyAiCloudState(asrState:RESULT"),
-        SDK_CARD_RECEIVE("D/ServiceApp_", "onCardReceivedSuccess(jsonObject"),
-        SDK_CARD_PARSED("D/ServiceApp_", "cardType = "),
-        SDK_REQUEST_TTS("D/ServiceApp_", "play() : audioStream="),
-        TTS_START("D/ServiceApp_", "PTTSNET_MSG_TTS_START"),
-        TTS_RECEIVE_STREAM("D/TVOICE_EVENT:", "[ TEVENT_START ] --> [ TEVENT_BUFFERING ]"),
-        TTS_PLAY_STREAM("D/TVOICE_EVENT:", "[ TEVENT_BUFFERING ] --> [ TEVENT_PLAYING ]");
+    enum class MeasureCriteria(var tag: String, var message: Array<String>) {
+        ASR_SPEECH_START("D/NUGUauto::NuguClientManager", arrayOf("asrListener.onStateChanged(state:SPEECH_START)")),
+        ASR_SPEECH_END("D/NUGUauto::NuguClientManager", arrayOf("asrListener.onStateChanged(state:SPEECH_END)")),
+        ASR_SPEECH_WAITING("D/NUGUauto::NuguClientManager", arrayOf("asrListener.onStateChanged(state:WAITING)")),
+        ASR_DIRECTIVE_COMPLETE("D/NUGUauto::NuguClientManager", arrayOf("directiveHandlingListener.onRequested(","namespace=ASR","\"state\":\"COMPLETE\"")),
+        TTS_PLAY_REQUEST("D/DefaultTTSAgent:", arrayOf("[startPlaying] sourceId: ")),
+        TTS_PLAY_BUFFER("D/NuguOpusPlayer2:", arrayOf("[onStatusChanged] status: READY")),
+        TTS_PLAY_START("D/NuguOpusPlayer2:", arrayOf("[onStatusChanged] status: STARTED")),
+        TTS_PLAY_PLAYING("D/DefaultTTSAgent:", arrayOf("[setCurrentState] state: PLAYING"));
     }
 
     // 발췌된 로그 데이터 클래스
@@ -199,9 +212,11 @@ class PerformanceAnalyzer {
         var message: String? = null
         var item: MeasureCriteria? = null
         override fun toString(): String {
-            val sb = StringBuilder() //.append(date).append(" ")
-                //.append(time).append(" ")
-                //.append(tag).append(" ")
+            val sb = StringBuilder()
+                .append(date).append(" ")
+                .append(time).append(" ")
+                .append(tag).append(" ")
+                .append(message).append(" ")
                 .append(item).append(" ")
             return sb.toString()
         }
